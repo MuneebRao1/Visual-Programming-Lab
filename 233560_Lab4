@@ -1,0 +1,141 @@
+using System;
+using System.Linq;
+
+public class Program
+{
+    // 1. Method to print the elements of a two-dimensional array
+    public static void Print2DArray(int[,] array)
+    {
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                Console.Write(array[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+
+    // 2. Method to merge an array of strings into a single string
+    public static string Merger(string[] s)
+    {
+        return string.Concat(s);
+    }
+
+    // 3. Method to extract words of length 4-5 containing vowels
+    public static string[] ExtractWords(string input)
+    {
+        return input.Split(' ')
+                    .Where(word => word.Length >= 4 && word.Length <= 5 &&
+                                   word.IndexOfAny(new char[] { 'a', 'e', 'i', 'o', 'u' }) >= 0)
+                    .ToArray();
+    }
+
+    // 4. Method to summarize the frequency of ratings
+    public static void SummarizeRatings(int[] responses)
+    {
+        int[] frequency = new int[5];
+        foreach (var response in responses)
+        {
+            frequency[response - 1]++;
+        }
+        for (int i = 0; i < frequency.Length; i++)
+        {
+            Console.WriteLine($"Response {i + 1} given by: {frequency[i]} people");
+        }
+    }
+
+    // 5. Methods to convert between Decimal and Binary
+    public static string DecimalToBinary(int decimalNumber)
+    {
+        return Convert.ToString(decimalNumber, 2);
+    }
+
+    public static int BinaryToDecimal(string binaryNumber)
+    {
+        return Convert.ToInt32(binaryNumber, 2);
+    }
+
+    // 6. Method to demonstrate the use of Multidimensional Rectangular Array
+    public static void PrintStudentMarks()
+    {
+        int[,] marks = {
+            { 92, 73, 86, 71, 97, 93, 95, 97, 80, 91 },
+            { 90, 86, 81, 80, 78, 78, 80, 82, 88, 88 },
+            { 99, 97, 89, 100, 77, 90, 78, 80, 78, 97 },
+            { 79, 95, 79, 77, 89, 84, 71, 92, 80, 83 },
+            { 72, 82, 97, 88, 90, 88, 80, 82, 88, 83 }
+        };
+
+        for (int i = 0; i < marks.GetLength(0); i++)
+        {
+            Console.Write($"Test {i + 1}: ");
+            for (int j = 0; j < marks.GetLength(1); j++)
+            {
+                Console.Write(marks[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+
+    // 7. Method to multiply two 3x3 matrices
+    public static int[,] MultiplyMatrices(int[,] A, int[,] B)
+    {
+        int[,] R = new int[3, 3];
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                for (int k = 0; k < 3; k++)
+                {
+                    R[i, j] += A[i, k] * B[k, j];
+                }
+            }
+        }
+        return R;
+    }
+
+    // Main method to demonstrate all functionalities
+    public static void Main(string[] args)
+    {
+        // 1. Initialize and display a two-dimensional array
+        int[,] array = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+        Print2DArray(array);
+
+        // 2. Merge an array of strings
+        string[] s = { "hello ", "and ", "welcome ", "to ", "this ", "demo! " };
+        Console.WriteLine(Merger(s));
+
+        // 3. Extract words of length 4-5 containing vowels
+        string input = "This is a sample input to extract words from";
+        string[] result = ExtractWords(input);
+        foreach (var word in result)
+        {
+            Console.WriteLine(word);
+        }
+
+        // 4. Summarize ratings
+        int[] responses = { 2, 2, 3, 4, 2, 3, 4, 5, 3, 4, 2, 1, 2, 3, 4, 4, 2, 3, 4, 2, 5, 5, 3, 2, 4, 4, 3, 2, 4, 4, 3, 4, 3, 2, 4, 3, 2, 5, 3, 4 };
+        SummarizeRatings(responses);
+
+        // 5. Convert between Decimal and Binary
+        int decimalNumber = 10;
+        string binaryNumber = DecimalToBinary(decimalNumber);
+        Console.WriteLine($"Decimal {decimalNumber} in Binary is {binaryNumber}");
+
+        binaryNumber = "1010";
+        decimalNumber = BinaryToDecimal(binaryNumber);
+        Console.WriteLine($"Binary {binaryNumber} in Decimal is {decimalNumber}");
+
+        // 6. Print student marks
+        PrintStudentMarks();
+
+        // 7. Multiply two 3x3 matrices
+        int[,] A = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+        int[,] B = { { 9, 8, 7 }, { 6, 5, 4 }, { 3, 2, 1 } };
+        int[,] R = MultiplyMatrices(A, B);
+
+        Console.WriteLine("Resultant Matrix after Multiplication:");
+        Print2DArray(R);
+    }
+}
