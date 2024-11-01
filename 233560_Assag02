@@ -1,0 +1,131 @@
+using System;
+using System.Reflection.Emit;
+using System.Windows.Controls;
+
+namespace WindowsFormsControlsTest
+{
+    public partial class MainForm : Form
+    {
+        private TextBox txtInput;
+        private RichTextBox rtbInput;
+        private CheckBox chkOption;
+        private ComboBox cmbOptions;
+        private DateTimePicker dtpPicker;
+        private Button btnShowMessage;
+        private Button btnSubmit;
+        private Label lblInput;
+        private Label lblRichTextBox;
+        private Label lblCheckBox;
+        private Label lblComboBox;
+        private Label lblDatePicker;
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void InitializeComponent()
+        {
+            this.txtInput = new TextBox();
+            this.rtbInput = new RichTextBox();
+            this.chkOption = new CheckBox();
+            this.cmbOptions = new ComboBox();
+            this.dtpPicker = new DateTimePicker();
+            this.btnShowMessage = new Button();
+            this.btnSubmit = new Button();
+            this.lblInput = new Label();
+            this.lblRichTextBox = new Label();
+            this.lblCheckBox = new Label();
+            this.lblComboBox = new Label();
+            this.lblDatePicker = new Label();
+
+            // Labels
+            this.lblInput.Location = new Point(20, 20);
+            this.lblInput.Text = "TextBox:";
+            this.Controls.Add(this.lblInput);
+
+            this.lblRichTextBox.Location = new Point(20, 70);
+            this.lblRichTextBox.Text = "RichTextBox:";
+            this.Controls.Add(this.lblRichTextBox);
+
+            this.lblCheckBox.Location = new Point(20, 160);
+            this.lblCheckBox.Text = "CheckBox:";
+            this.Controls.Add(this.lblCheckBox);
+
+            this.lblComboBox.Location = new Point(20, 190);
+            this.lblComboBox.Text = "ComboBox:";
+            this.Controls.Add(this.lblComboBox);
+
+            this.lblDatePicker.Location = new Point(20, 220);
+            this.lblDatePicker.Text = "DatePicker:";
+            this.Controls.Add(this.lblDatePicker);
+
+            // TextBox
+            this.txtInput.Location = new Point(100, 20);
+            this.Controls.Add(this.txtInput);
+
+            // RichTextBox
+            this.rtbInput.Location = new Point(100, 70);
+            this.rtbInput.Size = new Size(150, 80);
+            this.Controls.Add(this.rtbInput);
+
+            // CheckBox
+            this.chkOption.Location = new Point(100, 160);
+            this.chkOption.Text = "Option";
+            this.Controls.Add(this.chkOption);
+
+            // ComboBox
+            this.cmbOptions.Location = new Point(100, 190);
+            this.Controls.Add(this.cmbOptions);
+
+            // DateTimePicker
+            this.dtpPicker.Location = new Point(100, 220);
+            this.Controls.Add(this.dtpPicker);
+
+            // Show Message Button
+            this.btnShowMessage.Location = new Point(20, 260);
+            this.btnShowMessage.Text = "Show Message";
+            this.btnShowMessage.Click += new EventHandler(this.btnShowMessage_Click);
+            this.Controls.Add(this.btnShowMessage);
+
+            // Submit Button
+            this.btnSubmit.Location = new Point(120, 260);
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.Click += new EventHandler(this.btnSubmit_Click);
+            this.Controls.Add(this.btnSubmit);
+
+            // MainForm
+            this.ClientSize = new Size(280, 300);
+            this.Load += new EventHandler(this.MainForm_Load);
+        }
+
+        private void btnShowMessage_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hello, this is a MessageBox!", "Message Box", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            string input = txtInput.Text;
+            string richTextInput = rtbInput.Text;
+            bool isChecked = chkOption.Checked;
+            string selectedOption = cmbOptions.SelectedItem?.ToString() ?? "None";
+            string selectedDate = dtpPicker.Value.ToShortDateString();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                MessageBox.Show("Please enter a value in the TextBox.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBox.Show($"TextBox: {input}\nRichTextBox: {richTextInput}\nCheckBox: {isChecked}\nComboBox: {selectedOption}\nDate: {selectedDate}", "Input Summary");
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            // Populate ComboBox with options
+            cmbOptions.Items.Add("Option 1");
+            cmbOptions.Items.Add("Option 2");
+            cmbOptions.Items.Add("Option 3");
+        }
+    }
