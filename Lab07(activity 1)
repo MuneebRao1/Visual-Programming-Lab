@@ -1,0 +1,77 @@
+using System;
+using System.Windows.Forms;
+
+namespace GreetingApp
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void buttonGreet_Click(object sender, EventArgs e)
+        {
+            // Get the name from the TextBox
+            string userName = textBoxName.Text;
+
+            // Create a personalized greeting message
+            string greetingMessage = $"Hello, {userName}! Welcome to the application.";
+
+            // Display the greeting message in the Label
+            labelGreeting.Text = greetingMessage;
+        }
+    }
+}
+namespace GreetingApp
+{
+    partial class Form1
+    {
+        private System.ComponentModel.IContainer components = null;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
+            this.labelPrompt = new System.Windows.Forms.Label();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.buttonGreet = new System.Windows.Forms.Button();
+            this.labelGreeting = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // labelPrompt
+            // 
+            this.labelPrompt.AutoSize = true;
+            this.labelPrompt.Location = new System.Drawing.Point(12, 9);
+            this.labelPrompt.Name = "labelPrompt";
+            this.labelPrompt.Size = new System.Drawing.Size(104, 13);
+            this.labelPrompt.TabIndex = 0;
+            this.labelPrompt.Text = "Enter your name:";
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Location = new System.Drawing.Point(15, 25);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(257, 20);
+            this.textBoxName.TabIndex = 1;
+            // 
+            // buttonGreet
+            // 
+            this.buttonGreet.Location = new System.Drawing.Point(15, 51);
+            this.buttonGreet.Name = "buttonGreet";
+            this.buttonGreet.Size = new System.Drawing.Size(75, 23);
+            this.buttonGreet.TabIndex = 2;
+            this.buttonGreet.Text = "Greet Me";
+            this.buttonGreet.UseVisualStyleBackColor = true;
+            this.buttonGreet.Click += new System.EventHandler(this.buttonGreet_Click);
+            // 
+            // labelGreeting
+            // 
+            this.labelGreeting
