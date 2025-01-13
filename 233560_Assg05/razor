@@ -1,0 +1,52 @@
+@page "/citybuttons"
+@using System.Collections.Generic
+
+<h3>Cities</h3>
+
+<!-- Display City Buttons -->
+<div>
+    @foreach (var city in Cities)
+    {
+        <button class="btn btn-primary m-2" @onclick="() => OnCitySelected(city)">
+            @city
+        </button>
+    }
+</div>
+
+<!-- Placeholder for the Server List -->
+<h3>Server List</h3>
+<div>
+    @if (SelectedCity is not null)
+    {
+        <p>Selected City: <strong>@SelectedCity</strong></p>
+        <ul>
+            <li>Server 1 in @SelectedCity</li>
+            <li>Server 2 in @SelectedCity</li>
+            <li>Server 3 in @SelectedCity</li>
+        </ul>
+    }
+    else
+    {
+        <p>No city selected.</p>
+    }
+</div>
+
+@code {
+    // List of cities
+    private List<string> Cities = new();
+
+    // Selected city
+    private string? SelectedCity;
+
+    // Fetch cities on component initialization
+    protected override void OnInitialized()
+    {
+        Cities = CitiesRepository.GetCities();
+    }
+
+    // Handle city selection
+    private void OnCitySelected(string city)
+    {
+        SelectedCity = city;
+    }
+}
