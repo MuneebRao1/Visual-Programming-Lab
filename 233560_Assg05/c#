@@ -1,0 +1,16 @@
+using System.Collections.Generic;
+
+public static class CitiesRepository
+{
+    public static List<string> GetCities()
+    {
+        return new List<string>
+        {
+            "New York",
+            "Los Angeles",
+            "Chicago",
+            "Houston",
+            "Phoenix"
+        };
+    }
+}
